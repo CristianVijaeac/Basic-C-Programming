@@ -1,0 +1,44 @@
+	Prezentarea variabilelor:
+-x1=prima coordonata a terenului de pe axa OX
+-y1=prima coordonata a terenului de pe axa OY
+-x2=a doua coordonata a terenului de pe axa OX
+-y2=a doua coordonata a terenului de pe axa OY
+-n=numarul de pomi aflati pe teren
+-x=coordonata pomului de pe axa OX
+-y=coordonata pomului de pe axa OY
+-unghi=unghiul sub care cade pomul(in raport cu axa OX) masurat in grade
+-lungime=lungimea pomului   
+-d_min=in cazul subpunctului a,cea mai mica distanta de la pom la gard(perpendiculara cea mai mica de pe laturile terenului)
+-d_gard=in cazul subpunctelor b si c,distanta de la pom pana la punctul in care se intersecteaza cu gardul,in functie de unghiul mai sus mentionat
+-x_gard=coordonata de pe axa OX a punctului de intersectie cu gardul
+-y_gard=coordonata de pe axa OY a punctului de intesectie cu gardul
+-numar_taieturi=numarul de taieturi de lungime d_min/respectiv d_gard executate asupra pomului astfel incat acesta sa nu cada peste gard
+-ultima_taietura=restul de pom ramas in urma taieturilor precedente
+
+	Pentru rezolvarea acestei teme,am folosit un numar de 3 functii apelate in "main":
+
+-inainte de rezolvarea subpunctelor,am folosit functia "INTERSCHIMBARE" pentru ordonarea coordonatelor terenului astfel:primul punct este format din x-ul minim si y-ul minim al terenului,iar al doilea punct din x-ul maxim si y-ul maxim al terenului
+
+-pentru rezolvarea subpunctului a:
+1)am folosit functia "DISTANTE" pentru calcularea distantelor minime in raport cu cele 4 laturi(calcularea lungimii perpendicularelor pe cele 4 laturi)
+2)in functia principala,in urma apelarii functiei DISTANTE,am comparat fiecare distanta cu celelalte 3
+3)in momentul in care o distanta este mai mica decat toate celelalte 3,variabila d_min primeste aceasta valoare
+4)numarul de taieturi se afla impartind lungimea totala la aceasta distanta minima(d_min)
+5)ultima taietura reprezinta restul de pom ramas in urma taieturilor de mai sus
+
+-pentru rezolvarea subpunctului b:
+1)am folosit functia "distanta_gard" formata din urmatorii pasi:
+-prelucrarea valorii unghiului dat astfel incat valoare lui,pozitiva sau negativa,sa se afla numai in intervalul (0,360]
+-impartirea functiei in 4 cazuri corespunzatoarea celor 4 cadrane (0,90),(90,180),(180,270),(270,360) si rezolvarea cazurilor particulare(unghi=0,unghi=90,unghi=180,unghi=270,unghi=360)
+-fiecare din acest caz urmareste aflarea valorilor coordonatelor punctului de intersectie(x_gard,y_gard) si a distantei de la pom la gard(d_gard)
+2)afisarea celor rezultate in urma acestei functii depinde de conditia ca d_gard>=lungime:
+-daca conditia este indeplinita se afiseaza mesajul "Pomul ramane in livada"
+-daca nu,se afiseaza lungimea care iese in afara terenului(lungime-d_gard) si coordonatele punctului de intersectie cu gardul(x_gard,y_gard)
+
+-pentru rezolvarea subpunctului c:
+1)in "main",apelam functia "distanta_gard" care returneaza valoarea distantei de la pom la gard("d_gard")
+2)pe baza algoritmului de la subpunctul a,am calculat numarul de taieturi astfel incat bucatile de pom taiate sa nu iasa din teren si lungimea ultimei taieturi(Care reprezinta restul de pom ramas in urma taieturilor mentionate anterior)
+
+
+Mentiune:[tan((unghi*M_PI)/180)]-pentru ca functiile tan,sin,cos sa inteleaga marimea ungiului,aceasta trebuie transformata din grade in radieni.Astfel operatia (unghi*M_PI)/180) efectueaza trecerea valorii unghiului din grade,in radieni.
+
